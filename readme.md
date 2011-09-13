@@ -18,7 +18,7 @@ Usage
 
 Use either of the designated initalizers, depending on how you'd like to receive completion notices:
 
-#Blocks based:
+###Blocks based:
 
 		JBContainedURLConnection *connection = [[JBContainedURLConnection alloc] initWithURLString:someURLString userInfo:contextDictionary completionHandler:^(JBContainedURLConnection *connection, NSError *error, NSString *urlString, NSDictionary *userInfo, NSData *data) {
 			
@@ -38,7 +38,7 @@ Use either of the designated initalizers, depending on how you'd like to receive
 A non-nil error implies a failure. If the error is nil, then the loading was successful.
 
 
-#Delegate based:
+###Delegate based:
 
 Initialize with `- (id)initWithURLString:(NSString *)urlString userInfo:(NSDictionary *)userInfo delegate:(id<JBContainedURLConnectionDelegate>)delegate;` and implement the two `JBContainedURLConnectionDelegate` methods (both required)
 
