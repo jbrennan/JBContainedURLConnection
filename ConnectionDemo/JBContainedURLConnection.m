@@ -119,7 +119,14 @@
 
 
 
-
+- (void)cancel {
+	
+	[self.internalConnection cancel];
+	
+	self.internalConnection = nil;
+	self.internalData = nil;
+	
+}
 
 
 

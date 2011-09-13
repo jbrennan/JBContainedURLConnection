@@ -42,4 +42,8 @@ typedef void (^JBContainedURLConnectionCompletionHandler)(JBContainedURLConnecti
 - (id)initWithURLString:(NSString *)urlString userInfo:(NSDictionary *)userInfo completionHandler:(JBContainedURLConnectionCompletionHandler)handler;
 
 
+// Cancels the connection.
+- (void)cancel;
+
+
 @end
