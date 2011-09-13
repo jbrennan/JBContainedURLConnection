@@ -14,21 +14,24 @@
 		CDEE1C24141FB2E0009668EE /* JBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE1C23141FB2E0009668EE /* JBAppDelegate.m */; };
 		CDEE1C27141FB2E0009668EE /* JBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE1C26141FB2E0009668EE /* JBViewController.m */; };
 		CDEE1C2A141FB2E0009668EE /* JBViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDEE1C28141FB2E0009668EE /* JBViewController.xib */; };
+		CDEE1C37141FB59E009668EE /* JBContainedURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE1C36141FB59E009668EE /* JBContainedURLConnection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CDEE1C11141FB2E0009668EE /* ConnectionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConnectionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDEE1C15141FB2E0009668EE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CDEE1C17141FB2E0009668EE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		CDEE1C1B141FB2E0009668EE /* ConnectionDemo-Info.plist */ = {isa = PBXFileReference; path = "ConnectionDemo-Info.plist"; sourceTree = "<group>"; };
+		CDEE1C1B141FB2E0009668EE /* ConnectionDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ConnectionDemo-Info.plist"; sourceTree = "<group>"; };
 		CDEE1C1D141FB2E0009668EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CDEE1C1F141FB2E0009668EE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		CDEE1C21141FB2E0009668EE /* ConnectionDemo-Prefix.pch */ = {isa = PBXFileReference; path = "ConnectionDemo-Prefix.pch"; sourceTree = "<group>"; };
-		CDEE1C22141FB2E0009668EE /* JBAppDelegate.h */ = {isa = PBXFileReference; path = JBAppDelegate.h; sourceTree = "<group>"; };
+		CDEE1C21141FB2E0009668EE /* ConnectionDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ConnectionDemo-Prefix.pch"; sourceTree = "<group>"; };
+		CDEE1C22141FB2E0009668EE /* JBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JBAppDelegate.h; sourceTree = "<group>"; };
 		CDEE1C23141FB2E0009668EE /* JBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JBAppDelegate.m; sourceTree = "<group>"; };
-		CDEE1C25141FB2E0009668EE /* JBViewController.h */ = {isa = PBXFileReference; path = JBViewController.h; sourceTree = "<group>"; };
+		CDEE1C25141FB2E0009668EE /* JBViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JBViewController.h; sourceTree = "<group>"; };
 		CDEE1C26141FB2E0009668EE /* JBViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JBViewController.m; sourceTree = "<group>"; };
 		CDEE1C29141FB2E0009668EE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JBViewController.xib; sourceTree = "<group>"; };
+		CDEE1C35141FB59E009668EE /* JBContainedURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; path = JBContainedURLConnection.h; sourceTree = "<group>"; };
+		CDEE1C36141FB59E009668EE /* JBContainedURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBContainedURLConnection.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +81,8 @@
 				CDEE1C25141FB2E0009668EE /* JBViewController.h */,
 				CDEE1C26141FB2E0009668EE /* JBViewController.m */,
 				CDEE1C28141FB2E0009668EE /* JBViewController.xib */,
+				CDEE1C35141FB59E009668EE /* JBContainedURLConnection.h */,
+				CDEE1C36141FB59E009668EE /* JBContainedURLConnection.m */,
 				CDEE1C1A141FB2E0009668EE /* Supporting Files */,
 			);
 			path = ConnectionDemo;
@@ -160,6 +165,7 @@
 				CDEE1C20141FB2E0009668EE /* main.m in Sources */,
 				CDEE1C24141FB2E0009668EE /* JBAppDelegate.m in Sources */,
 				CDEE1C27141FB2E0009668EE /* JBViewController.m in Sources */,
+				CDEE1C37141FB59E009668EE /* JBContainedURLConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

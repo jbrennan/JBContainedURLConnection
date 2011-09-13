@@ -3,58 +3,59 @@
 //  ConnectionDemo
 //
 //  Created by Jason Brennan on 11-09-13.
-//  Copyright (c) 2011 Jason Brennan. All rights reserved.
+//  Public Domain
 //
 
 #import "JBViewController.h"
+#import "JBContainedURLConnection.h"
+
 
 @implementation JBViewController
+@synthesize connection = _connection;
 
-- (void)didReceiveMemoryWarning
-{
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
 
-#pragma mark - View lifecycle
+#pragma mark -
+#pragma mark View life cycle
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+	
+	// Create a connection, loading a large image file
+	_connection = [[JBContainedURLConnection alloc] initWithURLString:@"http://apod.nasa.gov/apod/image/0901/newrings_cassini_big.jpg" userInfo:nil completionHandler:^(JBContainedURLConnection *connection, NSError *error, NSString *urlString, NSDictionary *userInfo, NSData *data) {
+		
+		if (nil != error) {
+			
+			// Handle the error.
+			// A nil error indicates success!
+			
+			NSLog(@"Error! %@", [error userInfo]);
+			return;
+		}
+		
+		// Loading succeeded. Use the data, and optionally the URL and userInfo to determine context.
+		NSLog(@"All done loading");
+	}];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
+
+- (IBAction)present:(id)sender {
+	NSLog(@"Presenting a view controller!");
+	JBViewController *v = [[JBViewController alloc] initWithNibName:@"JBViewController" bundle:nil];
+	[self presentModalViewController:v animated:YES];
+	
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
-	[super viewDidDisappear:animated];
+
+- (IBAction)done:(id)sender {
+	[self dismissModalViewControllerAnimated:YES];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-	return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-}
+
 
 @end
