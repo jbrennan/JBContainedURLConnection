@@ -10,8 +10,10 @@
 
 @interface JBContainedURLConnection ()
 
-@property (nonatomic, strong) NSURLConnection *internalConnection;
-@property (nonatomic, strong) NSMutableData *internalData;
+@property (nonatomic, retain) NSURLConnection *internalConnection;
+@property (nonatomic, retain) NSMutableData *internalData;
+
+-(NSString*) HTTPMethod;
 
 
 @end
@@ -24,6 +26,7 @@
 @synthesize internalConnection = _internalConnection;
 @synthesize internalData = _internalData;
 @synthesize completionHandler = _completionHandler;
+@synthesize requestData = _requestData;
 
 
 - (void)dealloc {
@@ -39,6 +42,8 @@
 		self.urlString = urlString;
 		self.userInfo = userInfo;
 		_delegate = delegate;
+        _connectionType = JBContainedURLConnectionTypeGET;
+        self.requestData = [[NSData alloc] init];
 		
 		
 		// Set off the connection
@@ -63,7 +68,9 @@
 		
 		self.urlString = urlString;
 		self.userInfo = userInfo;
-		_completionHandler = handler; // readonly, no setter!
+		_completionHandler = [handler copy]; // readonly, no setter!
+        _connectionType = JBContainedURLConnectionTypeGET;
+        self.requestData = [[NSData alloc] init];
 		
 		
 		// Set off the connection
@@ -78,6 +85,43 @@
 	}
 	
 	return self;
+}
+
+-(id)initWithURLString:(NSString *)urlString forHttpMethod:(JBContainedURLConnectionType)httpMethod withRequestData:(NSData*)requestData userInfo:(NSDictionary*)userInfo andCompletionHandler:(JBContainedURLConnectionCompletionHandler)handler
+{
+    NSDictionary* additionalHeaders = [[NSDictionary alloc] initWithObjectsAndKeys:@"application/json", @"Content-Type", nil];
+    return [self initWithURLString:urlString forHttpMethod:httpMethod withRequestData:requestData additionalHeaders:additionalHeaders userInfo:userInfo andCompletionHandler:handler];
+}
+
+-(id)initWithURLString:(NSString *)urlString forHttpMethod:(JBContainedURLConnectionType)httpMethod withRequestData:(NSData*)requestData additionalHeaders:(NSDictionary*)headers userInfo:(NSDictionary*)userInfo andCompletionHandler:(JBContainedURLConnectionCompletionHandler)handler
+{
+    if(self = [super init])
+    {
+        self.urlString = urlString;
+        self.userInfo = userInfo;
+        _completionHandler = [handler copy];
+        _connectionType = httpMethod;
+        self.requestData = requestData;
+        
+        NSURL *url = [NSURL URLWithString:self.urlString];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        [request setHTTPMethod:[self HTTPMethod]];
+        [request setHTTPBody:self.requestData];
+        if( headers != nil )
+        {
+            for( NSString *key in [headers allKeys] )
+            {
+                [request addValue:[headers objectForKey:key] forHTTPHeaderField:key];
+            }
+        }
+        
+        self.internalData = [NSMutableData data];
+        self.internalConnection = [NSURLConnection connectionWithRequest:request delegate:self];
+    }
+    
+    return self;
+
 }
 
 
@@ -115,6 +159,22 @@
 	// Cleanup. Handy if you modify this class to support multiple connections from the same instance.
 	self.internalData = nil;
 	self.internalConnection = nil;
+}
+
+-(NSString*) HTTPMethod
+{
+    switch( _connectionType )
+    {
+        case JBContainedURLConnectionTypePOST:
+            return @"POST";
+        case JBContainedURLConnectionTypePUT:
+            return @"PUT";
+        case JBContainedURLConnectionTypeDELETE:
+            return @"DELETE";
+        case JBContainedURLConnectionTypeGET:
+        default:
+            return @"GET";
+    }
 }
 
 
