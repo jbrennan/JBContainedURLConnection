@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum { 
+    JBContainedURLConnectionTypeGET,
+    JBContainedURLConnectionTypePOST,
+    JBContainedURLConnectionTypePUT,
+    JBContainedURLConnectionTypeDELETE } JBContainedURLConnectionType;
 
 @class JBContainedURLConnection;
 
@@ -28,12 +33,16 @@ typedef void (^JBContainedURLConnectionCompletionHandler)(JBContainedURLConnecti
 
 
 @interface JBContainedURLConnection : NSObject
+{
+    JBContainedURLConnectionType _connectionType;
+}
 
 
-@property (nonatomic, weak, readonly) id<JBContainedURLConnectionDelegate> delegate;
+@property (nonatomic, assign, readonly) id<JBContainedURLConnectionDelegate> delegate;
 @property (nonatomic, copy, readonly) JBContainedURLConnectionCompletionHandler completionHandler;
 @property (nonatomic, copy) NSString *urlString;
-@property (nonatomic, strong) NSDictionary *userInfo;
+@property (nonatomic, retain) NSDictionary *userInfo;
+@property (nonatomic, retain) NSData* requestData;
 
 
 // Initializers.
@@ -41,6 +50,8 @@ typedef void (^JBContainedURLConnectionCompletionHandler)(JBContainedURLConnecti
 - (id)initWithURLString:(NSString *)urlString userInfo:(NSDictionary *)userInfo delegate:(id<JBContainedURLConnectionDelegate>)delegate;
 - (id)initWithURLString:(NSString *)urlString userInfo:(NSDictionary *)userInfo completionHandler:(JBContainedURLConnectionCompletionHandler)handler;
 
+-(id)initWithURLString:(NSString *)urlString forHttpMethod:(JBContainedURLConnectionType)httpMethod withRequestData:(NSData*)requestData userInfo:(NSDictionary*)userInfo andCompletionHandler:(JBContainedURLConnectionCompletionHandler)handler;
+-(id)initWithURLString:(NSString *)urlString forHttpMethod:(JBContainedURLConnectionType)httpMethod withRequestData:(NSData*)requestData additionalHeaders:(NSDictionary*)headers userInfo:(NSDictionary*)userInfo andCompletionHandler:(JBContainedURLConnectionCompletionHandler)handler;
 
 // Cancels the connection.
 - (void)cancel;
