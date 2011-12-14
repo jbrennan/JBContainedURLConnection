@@ -12,7 +12,9 @@ typedef enum {
     JBContainedURLConnectionTypeGET,
     JBContainedURLConnectionTypePOST,
     JBContainedURLConnectionTypePUT,
-    JBContainedURLConnectionTypeDELETE } JBContainedURLConnectionType;
+    JBContainedURLConnectionTypeDELETE
+} JBContainedURLConnectionType;
+
 
 @class JBContainedURLConnection;
 
@@ -33,10 +35,6 @@ typedef void (^JBContainedURLConnectionCompletionHandler)(JBContainedURLConnecti
 
 
 @interface JBContainedURLConnection : NSObject
-{
-    JBContainedURLConnectionType _connectionType;
-}
-
 
 @property (nonatomic, assign, readonly) id<JBContainedURLConnectionDelegate> delegate;
 @property (nonatomic, copy, readonly) JBContainedURLConnectionCompletionHandler completionHandler;
@@ -50,8 +48,8 @@ typedef void (^JBContainedURLConnectionCompletionHandler)(JBContainedURLConnecti
 - (id)initWithURLString:(NSString *)urlString userInfo:(NSDictionary *)userInfo delegate:(id<JBContainedURLConnectionDelegate>)delegate;
 - (id)initWithURLString:(NSString *)urlString userInfo:(NSDictionary *)userInfo completionHandler:(JBContainedURLConnectionCompletionHandler)handler;
 
--(id)initWithURLString:(NSString *)urlString forHttpMethod:(JBContainedURLConnectionType)httpMethod withRequestData:(NSData*)requestData userInfo:(NSDictionary*)userInfo andCompletionHandler:(JBContainedURLConnectionCompletionHandler)handler;
--(id)initWithURLString:(NSString *)urlString forHttpMethod:(JBContainedURLConnectionType)httpMethod withRequestData:(NSData*)requestData additionalHeaders:(NSDictionary*)headers userInfo:(NSDictionary*)userInfo andCompletionHandler:(JBContainedURLConnectionCompletionHandler)handler;
+- (id)initWithURLString:(NSString *)urlString forHttpMethod:(JBContainedURLConnectionType)httpMethod withRequestData:(NSData *)requestData userInfo:(NSDictionary *)userInfo andCompletionHandler:(JBContainedURLConnectionCompletionHandler)handler;
+- (id)initWithURLString:(NSString *)urlString forHttpMethod:(JBContainedURLConnectionType)httpMethod withRequestData:(NSData *)requestData additionalHeaders:(NSDictionary *)headers userInfo:(NSDictionary *)userInfo andCompletionHandler:(JBContainedURLConnectionCompletionHandler)handler;
 
 // Cancels the connection.
 - (void)cancel;

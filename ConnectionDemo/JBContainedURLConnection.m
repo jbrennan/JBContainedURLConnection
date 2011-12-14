@@ -12,6 +12,7 @@
 
 @property (nonatomic, retain) NSURLConnection *internalConnection;
 @property (nonatomic, retain) NSMutableData *internalData;
+@property (nonatomic, assign) JBContainedURLConnectionType connectionType;
 
 -(NSString*) HTTPMethod;
 
@@ -27,6 +28,7 @@
 @synthesize internalData = _internalData;
 @synthesize completionHandler = _completionHandler;
 @synthesize requestData = _requestData;
+@synthesize connectionType = _connectionType;
 
 
 - (void)dealloc {
@@ -87,16 +89,17 @@
 	return self;
 }
 
--(id)initWithURLString:(NSString *)urlString forHttpMethod:(JBContainedURLConnectionType)httpMethod withRequestData:(NSData*)requestData userInfo:(NSDictionary*)userInfo andCompletionHandler:(JBContainedURLConnectionCompletionHandler)handler
-{
-    NSDictionary* additionalHeaders = [[NSDictionary alloc] initWithObjectsAndKeys:@"application/json", @"Content-Type", nil];
+-(id)initWithURLString:(NSString *)urlString forHttpMethod:(JBContainedURLConnectionType)httpMethod withRequestData:(NSData *)requestData userInfo:(NSDictionary *)userInfo andCompletionHandler:(JBContainedURLConnectionCompletionHandler)handler {
+   
+	NSDictionary *additionalHeaders = [[NSDictionary alloc] initWithObjectsAndKeys:@"application/json", @"Content-Type", nil];
     return [self initWithURLString:urlString forHttpMethod:httpMethod withRequestData:requestData additionalHeaders:additionalHeaders userInfo:userInfo andCompletionHandler:handler];
 }
 
--(id)initWithURLString:(NSString *)urlString forHttpMethod:(JBContainedURLConnectionType)httpMethod withRequestData:(NSData*)requestData additionalHeaders:(NSDictionary*)headers userInfo:(NSDictionary*)userInfo andCompletionHandler:(JBContainedURLConnectionCompletionHandler)handler
-{
-    if(self = [super init])
-    {
+
+-(id)initWithURLString:(NSString *)urlString forHttpMethod:(JBContainedURLConnectionType)httpMethod withRequestData:(NSData *)requestData additionalHeaders:(NSDictionary *)headers userInfo:(NSDictionary *)userInfo andCompletionHandler:(JBContainedURLConnectionCompletionHandler)handler {
+    
+	if ((self = [super init])) {
+		
         self.urlString = urlString;
         self.userInfo = userInfo;
         _completionHandler = [handler copy];
@@ -108,10 +111,9 @@
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         [request setHTTPMethod:[self HTTPMethod]];
         [request setHTTPBody:self.requestData];
-        if( headers != nil )
-        {
-            for( NSString *key in [headers allKeys] )
-            {
+        
+		if (headers != nil) {
+            for (NSString *key in [headers allKeys]) {
                 [request addValue:[headers objectForKey:key] forHTTPHeaderField:key];
             }
         }
@@ -161,10 +163,9 @@
 	self.internalConnection = nil;
 }
 
--(NSString*) HTTPMethod
-{
-    switch( _connectionType )
-    {
+- (NSString *)HTTPMethod {
+	
+    switch( _connectionType ) {
         case JBContainedURLConnectionTypePOST:
             return @"POST";
         case JBContainedURLConnectionTypePUT:
