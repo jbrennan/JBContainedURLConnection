@@ -22,7 +22,7 @@
 
 @implementation JBContainedURLConnection
 @synthesize delegate	= _delegate;
-@synthesize urlString	= _urlString;
+@synthesize url	= _url;
 @synthesize userInfo	= _userInfo;
 @synthesize internalConnection = _internalConnection;
 @synthesize internalData = _internalData;
@@ -38,10 +38,10 @@
 }
 
 
-- (id)initWithURLString:(NSString *)urlString userInfo:(NSDictionary *)userInfo delegate:(id<JBContainedURLConnectionDelegate>)delegate {
+- (id)initWithURL:(NSURL *)url userInfo:(NSDictionary *)userInfo delegate:(id<JBContainedURLConnectionDelegate>)delegate {
 	
 	if ((self = [super init])) {
-		self.urlString = urlString;
+		self.url = url;
 		self.userInfo = userInfo;
 		_delegate = delegate;
         _connectionType = JBContainedURLConnectionTypeGET;
@@ -49,8 +49,7 @@
 		
 		
 		// Set off the connection
-		NSURL *url = [NSURL URLWithString:urlString];
-		NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+		NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.url];
 		
 		self.internalData = [NSMutableData data];
 		
@@ -64,11 +63,11 @@
 }
 
 
-- (id)initWithURLString:(NSString *)urlString userInfo:(NSDictionary *)userInfo completionHandler:(JBContainedURLConnectionCompletionHandler)handler {
+- (id)initWithURL:(NSURL *)url userInfo:(NSDictionary *)userInfo completionHandler:(JBContainedURLConnectionCompletionHandler)handler {
 	
 	if ((self = [super init])) {
 		
-		self.urlString = urlString;
+		self.url = url;
 		self.userInfo = userInfo;
 		_completionHandler = [handler copy]; // readonly, no setter!
         _connectionType = JBContainedURLConnectionTypeGET;
@@ -76,7 +75,6 @@
 		
 		
 		// Set off the connection
-		NSURL *url = [NSURL URLWithString:urlString];
 		NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 		
 		
@@ -89,26 +87,24 @@
 	return self;
 }
 
--(id)initWithURLString:(NSString *)urlString forHttpMethod:(JBContainedURLConnectionType)httpMethod withRequestData:(NSData *)requestData userInfo:(NSDictionary *)userInfo andCompletionHandler:(JBContainedURLConnectionCompletionHandler)handler {
+-(id)initWithURL:(NSURL *)url forHttpMethod:(JBContainedURLConnectionType)httpMethod withRequestData:(NSData *)requestData userInfo:(NSDictionary *)userInfo andCompletionHandler:(JBContainedURLConnectionCompletionHandler)handler {
    
 	NSDictionary *additionalHeaders = [[NSDictionary alloc] initWithObjectsAndKeys:@"application/json", @"Content-Type", nil];
-    return [self initWithURLString:urlString forHttpMethod:httpMethod withRequestData:requestData additionalHeaders:additionalHeaders userInfo:userInfo andCompletionHandler:handler];
+    return [self initWithURL:url forHttpMethod:httpMethod withRequestData:requestData additionalHeaders:additionalHeaders userInfo:userInfo andCompletionHandler:handler];
 }
 
 
--(id)initWithURLString:(NSString *)urlString forHttpMethod:(JBContainedURLConnectionType)httpMethod withRequestData:(NSData *)requestData additionalHeaders:(NSDictionary *)headers userInfo:(NSDictionary *)userInfo andCompletionHandler:(JBContainedURLConnectionCompletionHandler)handler {
+-(id)initWithURL:(NSURL *)url forHttpMethod:(JBContainedURLConnectionType)httpMethod withRequestData:(NSData *)requestData additionalHeaders:(NSDictionary *)headers userInfo:(NSDictionary *)userInfo andCompletionHandler:(JBContainedURLConnectionCompletionHandler)handler {
     
 	if ((self = [super init])) {
 		
-        self.urlString = urlString;
+        self.url = url;
         self.userInfo = userInfo;
         _completionHandler = [handler copy];
         _connectionType = httpMethod;
         self.requestData = requestData;
         
-        NSURL *url = [NSURL URLWithString:self.urlString];
-        
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.url];
         [request setHTTPMethod:[self HTTPMethod]];
         [request setHTTPBody:self.requestData];
         
@@ -137,7 +133,7 @@
 	[self.delegate HTTPConnection:self didFailWithError:error];
 	
 	if (self.completionHandler) {
-		self.completionHandler(self, error, self.urlString, self.userInfo, nil);
+		self.completionHandler(self, error, self.url, self.userInfo, nil);
 	}
 	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -150,10 +146,10 @@
 
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-	[self.delegate HTTPConnection:self didCompleteForURL:self.urlString userInfo:self.userInfo completedData:[NSData dataWithData:self.internalData]];
+	[self.delegate HTTPConnection:self didCompleteForURL:self.url userInfo:self.userInfo completedData:[NSData dataWithData:self.internalData]];
 	
 	if (self.completionHandler) {
-		self.completionHandler(self, nil, self.urlString, self.userInfo, [NSData dataWithData:self.internalData]);
+		self.completionHandler(self, nil, self.url, self.userInfo, [NSData dataWithData:self.internalData]);
 	}
 	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
