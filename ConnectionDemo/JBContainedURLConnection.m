@@ -29,6 +29,7 @@
 @synthesize completionHandler = _completionHandler;
 @synthesize requestData = _requestData;
 @synthesize connectionType = _connectionType;
+@synthesize responseTextEncoding = _responseTextEncoding;
 
 
 - (void)dealloc {
@@ -124,6 +125,7 @@
 
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    self.responseTextEncoding = [response textEncodingName];
 	[self.internalData setLength:0];
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 }
