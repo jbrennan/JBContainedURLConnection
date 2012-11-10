@@ -13,6 +13,7 @@
 @property (nonatomic, retain) NSURLConnection *internalConnection;
 @property (nonatomic, retain) NSMutableData *internalData;
 @property (nonatomic, assign) JBContainedURLConnectionType connectionType;
+@property (nonatomic, copy) NSString *responseTextEncoding;
 
 -(NSString*) HTTPMethod;
 
