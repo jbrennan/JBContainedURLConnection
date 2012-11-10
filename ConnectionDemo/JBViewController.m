@@ -27,7 +27,8 @@
     [super viewDidAppear:animated];
 	
 	// Create a connection, loading a large image file
-	_connection = [[JBContainedURLConnection alloc] initWithURLString:@"http://apod.nasa.gov/apod/image/0901/newrings_cassini_big.jpg" userInfo:nil completionHandler:^(JBContainedURLConnection *connection, NSError *error, NSString *urlString, NSDictionary *userInfo, NSData *data) {
+    NSURL *largeURL = [NSURL URLWithString:@"http://apod.nasa.gov/apod/image/0901/newrings_cassini_big.jpg"];
+	_connection = [[JBContainedURLConnection alloc] initWithURL:largeURL userInfo:nil completionHandler:^(JBContainedURLConnection *connection, NSError *error, NSURL *url, NSDictionary *userInfo, NSData *data) {
 		
 		if (nil != error) {
 			

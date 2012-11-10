@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3712699C1647631B00CDCAD0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3712699B1647631B00CDCAD0 /* Default-568h@2x.png */; };
 		CDEE1C16141FB2E0009668EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDEE1C15141FB2E0009668EE /* UIKit.framework */; };
 		CDEE1C18141FB2E0009668EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDEE1C17141FB2E0009668EE /* Foundation.framework */; };
 		CDEE1C1E141FB2E0009668EE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDEE1C1C141FB2E0009668EE /* InfoPlist.strings */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3712699B1647631B00CDCAD0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CDEE1C11141FB2E0009668EE /* ConnectionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConnectionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDEE1C15141FB2E0009668EE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CDEE1C17141FB2E0009668EE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -30,7 +32,7 @@
 		CDEE1C25141FB2E0009668EE /* JBViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JBViewController.h; sourceTree = "<group>"; };
 		CDEE1C26141FB2E0009668EE /* JBViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JBViewController.m; sourceTree = "<group>"; };
 		CDEE1C29141FB2E0009668EE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JBViewController.xib; sourceTree = "<group>"; };
-		CDEE1C35141FB59E009668EE /* JBContainedURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; path = JBContainedURLConnection.h; sourceTree = "<group>"; };
+		CDEE1C35141FB59E009668EE /* JBContainedURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBContainedURLConnection.h; sourceTree = "<group>"; };
 		CDEE1C36141FB59E009668EE /* JBContainedURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBContainedURLConnection.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,6 +97,7 @@
 				CDEE1C1C141FB2E0009668EE /* InfoPlist.strings */,
 				CDEE1C1F141FB2E0009668EE /* main.m */,
 				CDEE1C21141FB2E0009668EE /* ConnectionDemo-Prefix.pch */,
+				3712699B1647631B00CDCAD0 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 			files = (
 				CDEE1C1E141FB2E0009668EE /* InfoPlist.strings in Resources */,
 				CDEE1C2A141FB2E0009668EE /* JBViewController.xib in Resources */,
+				3712699C1647631B00CDCAD0 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +281,7 @@
 				CDEE1C2F141FB2E0009668EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
