@@ -33,8 +33,6 @@
 
 
 - (void)dealloc {
-    
-	NSLog(@"Connection dealloc");
 	[self.internalConnection cancel];
 }
 
