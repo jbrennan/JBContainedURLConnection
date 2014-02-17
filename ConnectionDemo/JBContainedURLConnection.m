@@ -14,6 +14,7 @@
 @property (nonatomic, retain) NSMutableData *internalData;
 @property (nonatomic, assign) JBContainedURLConnectionType connectionType;
 @property (nonatomic, copy) NSString *responseTextEncoding;
+@property (nonatomic, assign) NSInteger statusCode;
 
 -(NSString*) HTTPMethod;
 
@@ -31,6 +32,7 @@
 @synthesize requestData = _requestData;
 @synthesize connectionType = _connectionType;
 @synthesize responseTextEncoding = _responseTextEncoding;
+@synthesize statusCode = _statusCode;
 
 
 - (void)dealloc {
@@ -124,6 +126,10 @@
 
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        self.statusCode = [httpResponse statusCode];
+    }
     self.responseTextEncoding = [response textEncodingName];
 	[self.internalData setLength:0];
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
