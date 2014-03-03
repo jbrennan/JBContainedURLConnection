@@ -42,6 +42,7 @@ typedef void (^JBContainedURLConnectionCompletionHandler)(JBContainedURLConnecti
 @property (nonatomic, retain) NSDictionary *userInfo;
 @property (nonatomic, retain) NSData* requestData;
 @property (nonatomic, readonly, copy) NSString *responseTextEncoding;
+@property (nonatomic, readonly, assign) NSInteger statusCode;
 
 
 // Initializers.
