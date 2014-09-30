@@ -32,12 +32,19 @@ typedef void (^JBContainedURLConnectionCompletionHandler)(JBContainedURLConnecti
 
 @end
 
+// The Network Activity callback type.
+// Will be called when JBContainedURLConnection starts and stops
+// network activity.
+// An example implementation would simply call
+// [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:active]
+typedef void (^JBNetworkActivityHandler)(BOOL active);
 
 
 @interface JBContainedURLConnection : NSObject
 
 @property (nonatomic, assign, readonly) id<JBContainedURLConnectionDelegate> delegate;
 @property (nonatomic, copy, readonly) JBContainedURLConnectionCompletionHandler completionHandler;
+@property (nonatomic, copy) JBNetworkActivityHandler activityHandler;
 @property (nonatomic, copy) NSURL *url;
 @property (nonatomic, retain) NSDictionary *userInfo;
 @property (nonatomic, retain) NSData* requestData;
