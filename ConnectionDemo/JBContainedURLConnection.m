@@ -132,7 +132,9 @@
     }
     self.responseTextEncoding = [response textEncodingName];
 	[self.internalData setLength:0];
-	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+	if (self.activityHandler) {
+		self.activityHandler(YES);
+	}
 }
 
 
@@ -143,7 +145,9 @@
 		self.completionHandler(self, error, self.url, self.userInfo, nil);
 	}
 	
-	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+	if (self.activityHandler) {
+		self.activityHandler(NO);
+	}
 }
 
 
@@ -159,8 +163,10 @@
 		self.completionHandler(self, nil, self.url, self.userInfo, [NSData dataWithData:self.internalData]);
 	}
 	
-	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-	
+	if (self.activityHandler) {
+		self.activityHandler(NO);
+	}
+
 	// Cleanup. Handy if you modify this class to support multiple connections from the same instance.
 	self.internalData = nil;
 	self.internalConnection = nil;
